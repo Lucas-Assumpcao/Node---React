@@ -96,11 +96,15 @@ flowchart LR
 3. ⏸️ Conectar o SQLite — **adiado por decisão consciente** (ver seção 11)
 4. ✅ Testar todas as rotas isoladamente via Thunder Client (feito no passo 2, junto com a criação de cada rota)
 5. ✅ Criar o front-end com `npm create vite@latest frontend -- --template react` (linter: ESLint)
-6. 🔵 Configurar **React Router** (`react-router-dom`) e páginas básicas de navegação — **próximo passo imediato**, motivado por dificuldade da aula em entender rotas
-7. ⬜ Construir os componentes (lista, formulário, filtro)
-8. ⬜ Conectar o React à API via `fetch` (listar, criar, editar, excluir)
+6. ✅ Configurar **React Router** (`react-router-dom`): `BrowserRouter` no `main.jsx`, `Routes`/`Route`/`Link` no `App.jsx`, páginas `ListaCatalogo` e `NovoItem` navegáveis sem reload, F5 funcionando em qualquer rota
+7. ✅ Construir os componentes de conteúdo inicial: `ListaCatalogo` (lista com `.map()`) e `NovoItem` (formulário controlado com `useState`)
+8. ✅ Conectar o React à API via `fetch`: listagem via `useEffect` (GET) e criação via `handleSubmit` (POST), com reset do formulário após salvar
 9. ✅ Configurar CORS no Express (feito no passo 2)
-10. ⬜ Revisão final + ajustes de UX simples (loading, mensagens de erro)
+10. ⬜ Revisão final + ajustes de UX (loading, mensagens de erro, evitar duplicidade de POST em cliques múltiplos)
+11. ⬜ Editar item pela interface (reaproveitar rota PUT já testada)
+12. ⬜ Remover item pela interface (reaproveitar rota DELETE já testada)
+13. ⬜ Filtro por tipo/status na lista
+14. ⬜ Estilização (CSS mínimo, funcional)
 
 ## 9. Fora de escopo (por enquanto)
 
@@ -112,12 +116,48 @@ flowchart LR
 ## 10. Status
 
 🟢 **Back-end funcional (CRUD completo, com array em memória).**
-🟢 **Projeto front-end criado (Vite + React + ESLint), fundamentos de React estudados.**
-🔵 **Próximo: React Router.**
+🟢 **Front-end funcional: React Router, listagem via API (GET) e criação via formulário (POST).**
+🟢 **Repositório limpo: `node_modules` removido do controle de versão, `.gitignore` na raiz correta, confirmado no GitHub.**
+🔵 **Próximo: editar/remover item pela interface (reaproveitando rotas PUT/DELETE já testadas).**
 
-Próximo passo: item 6 do roteiro (configurar `react-router-dom` e páginas básicas de navegação).
+## 11. Decisões registradas
 
-## 12. Conceitos de React já estudados (16/08/2026)
+**SQLite adiado (passo 3):** decisão consciente de pular a persistência com banco de dados
+por enquanto. Motivo: o foco imediato é acompanhar o conteúdo de React/Vite que será
+abordado na semana seguinte de aula, e o SQLite não é pré-requisito para isso — a estrutura
+das rotas (status HTTP, `req.params`, `req.body`) permanece igual independente de onde os
+dados são guardados. Efeito colateral aceito: o array em memória reseta a cada reinício do
+`nodemon` (ou permanece "travado" em um estado antigo se o processo continuar rodando sem
+reiniciar — já observado na prática ao testar a lista com o array vazio de uma sessão
+anterior). Retomar esse passo quando o projeto for tratado como entrega "definitiva", ou
+quando a disciplina abordar bancos de dados.
+
+**React Router priorizado antes dos componentes de conteúdo:** ajuste no roteiro original
+motivado por uma dificuldade real em aula — ao tentar acessar páginas diretamente (ex: via
+URL ou F5), sem o roteamento configurado, as páginas não abriam. O objetivo era entender
+a mecânica de rotas dentro do React de forma sólida (aplicável a qualquer projeto, não só
+este), antes de preencher as páginas com conteúdo e dados reais da API. **Concluído.**
+
+**Limpeza do repositório Git (`node_modules`):** o projeto já havia sido commitado e enviado
+ao GitHub algumas vezes antes da criação do `.gitignore`, incluindo a pasta `backend/node_modules`
+no histórico. Corrigido com `git rm -r --cached node_modules` (remove do controle de versão,
+mantém os arquivos localmente) seguido de commit incluindo o `.gitignore`. A pasta
+`frontend/node_modules` nunca chegou a ser commitada, então não precisou do mesmo tratamento.
+
+Duas armadilhas encontradas e resolvidas no processo (registradas para referência futura):
+1. A ordem importa — `.gitignore` precisa estar **commitado antes** de rodar `git add -A`,
+   senão arquivos que deveriam ser ignorados (como `node_modules`) podem ser re-adicionados
+   ao índice do Git sem querer, desfazendo o `git rm --cached`.
+2. A **raiz real do repositório Git** é a pasta `Node + React` (onde vive a pasta `.git`),
+   **um nível acima** de `catalogo-anime-livros`. Comandos Git rodados de dentro de
+   `catalogo-anime-livros` funcionam normalmente (o Git busca o `.git` subindo diretórios),
+   mas o `.gitignore` precisa estar fisicamente na pasta `Node + React` para ser reconhecido
+   como estando "na raiz" pelo próprio Git.
+
+**Status final: resolvido e confirmado no GitHub** — `node_modules` não aparece mais na
+listagem de arquivos do repositório.
+
+## 12. Conceitos de React já estudados
 
 Para retomar rápido em uma próxima sessão, sem precisar reexplicar do zero:
 
@@ -130,24 +170,15 @@ Para retomar rápido em uma próxima sessão, sem precisar reexplicar do zero:
 - **State (`useState`)**: hook que cria uma variável "vigiada" pelo React — quando muda via
   a função `set` (ex: `setCount`), o React redesenha a tela automaticamente. Nunca se altera
   o valor diretamente (`count = count + 1` não funciona; precisa de `setCount(count + 1)`)
-
-Motivo de aprender React Router antes de construir os componentes de conteúdo: dificuldade
-relatada em aula ao tentar acessar páginas diretamente (via URL ou F5) sem o roteamento
-configurado — as páginas não abriam.
-
-## 11. Decisões registradas
-
-**SQLite adiado (passo 3):** decisão consciente de pular a persistência com banco de dados
-por enquanto. Motivo: o foco imediato é acompanhar o conteúdo de React/Vite que será
-abordado na semana seguinte de aula, e o SQLite não é pré-requisito para isso — a estrutura
-das rotas (status HTTP, `req.params`, `req.body`) permanece igual independente de onde os
-dados são guardados. Efeito colateral aceito: o array em memória reseta a cada reinício do
-`nodemon`, então dados criados via `POST` durante os testes não persistem entre sessões.
-Retomar esse passo quando o projeto for tratado como entrega "definitiva", ou quando a
-disciplina abordar bancos de dados.
-
-**React Router priorizado antes dos componentes de conteúdo:** ajuste no roteiro original
-motivado por uma dificuldade real em aula — ao tentar acessar páginas diretamente (ex: via
-URL ou F5), sem o roteamento configurado, as páginas não abriam. O objetivo agora é entender
-a mecânica de rotas dentro do React de forma sólida (aplicável a qualquer projeto, não só
-este), antes de preencher as páginas com conteúdo e dados reais da API.
+- **`useEffect`**: hook que executa uma ação automaticamente quando o componente aparece na
+  tela; com array de dependências vazio (`[]`), roda uma única vez. Usado para buscar dados
+  da API assim que a página carrega (`fetch` dentro do `useEffect`)
+- **React Router**: `BrowserRouter` (envolve a aplicação, ativa o roteamento), `Routes` +
+  `Route` (associam caminho de URL a um componente), `Link` (navega sem recarregar a página,
+  ao contrário de `<a href>`)
+- **Formulário controlado**: cada campo tem seu valor vindo de um `state` (`value={...}`) e
+  atualizado via `onChange`; múltiplos campos guardados em um objeto só, atualizados com
+  spread (`setFormulario({ ...formulario, campo: novoValor })`) para não apagar os demais
+- **`fetch` com POST**: requer um segundo argumento com `method`, `headers` (
+  `Content-Type: application/json`) e `body` (`JSON.stringify(objeto)`); `e.preventDefault()`
+  no `onSubmit` evita o reload padrão do formulário HTML

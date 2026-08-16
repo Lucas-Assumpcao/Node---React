@@ -3,7 +3,7 @@
 Projeto de estudo full-stack (Node.js + React) construído como preparação prática
 para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
 
-> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Projeto front-end criado (Vite+React) · 🔵 Próximo: React Router
+> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Front-end funcional (React Router + listagem + criação via API) · 🔵 Próximo: editar/remover pela interface
 > Veja o roteiro e as decisões de progresso completas em [`ESCOPO.md`](./ESCOPO.md).
 
 ## 💡 Sobre o projeto
@@ -61,7 +61,17 @@ flowchart LR
 > Nota: persistência ainda é em array (memória) — SQLite adiado por decisão registrada
 > no `ESCOPO.md` (seção 11). Dados criados via `POST` não sobrevivem a reinícios do servidor.
 
-## ▶️ Como rodar (quando implementado)
+## 🧭 Rotas do front-end (React Router)
+
+| Caminho  | Página            | Status |
+|----------|--------------------|--------|
+| `/`      | `ListaCatalogo` — lista os itens vindos da API (GET) | ✅ |
+| `/novo`  | `NovoItem` — formulário controlado que cria um item (POST) | ✅ |
+
+> Navegação sem reload via `<Link>`, e F5 funciona normalmente em qualquer rota
+> (resolve um problema real enfrentado em aula com roteamento no React).
+
+## ▶️ Como rodar
 
 ```bash
 # back-end
