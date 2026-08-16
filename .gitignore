@@ -1,0 +1,18 @@
+# Dependências (geradas pelo npm install — não devem ir pro Git)
+node_modules/
+
+# Variáveis de ambiente (podem conter senhas/chaves no futuro)
+.env
+.env.local
+
+# Build de produção (gerado pelo Vite, não é código-fonte)
+frontend/dist/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Arquivos de editor/SO
+.vscode/
+.DS_Store
+Thumbs.db
