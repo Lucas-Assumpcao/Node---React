@@ -20,6 +20,13 @@ function NovoItem() {
       .then((resposta) => resposta.json())
       .then((itemCriado) => {
         console.log('Item criado:', itemCriado);
+        setFormulario({
+          titulo: '',
+          tipo: 'anime',
+          status: 'quero_ver',
+          nota: '',
+          comentario: '',
+        });
       });
   }
 
