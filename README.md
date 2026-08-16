@@ -3,8 +3,8 @@
 Projeto de estudo full-stack (Node.js + React) construído como preparação prática
 para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
 
-> Status: 🟡 Planejamento concluído — implementação ainda não iniciada.
-> Veja o roteiro completo em [`ESCOPO.md`](./ESCOPO.md).
+> Status: 🟢 Back-end funcional (CRUD completo) · 🔵 Front-end em andamento (React Router)
+> Veja o roteiro e as decisões de progresso completas em [`ESCOPO.md`](./ESCOPO.md).
 
 ## 💡 Sobre o projeto
 
@@ -48,15 +48,18 @@ flowchart LR
     B -- JSON --> A
 ```
 
-## 📋 Rotas da API (planejadas)
+## 📋 Rotas da API (implementadas e testadas via Thunder Client)
 
-| Método | Rota             | Ação                |
-|--------|-------------------|----------------------|
-| GET    | `/catalogo`       | Lista todos os itens |
-| GET    | `/catalogo/:id`   | Detalha um item      |
-| POST   | `/catalogo`       | Cria um item         |
-| PUT    | `/catalogo/:id`   | Edita um item        |
-| DELETE | `/catalogo/:id`   | Remove um item       |
+| Método | Rota             | Ação                                  | Status |
+|--------|-------------------|-----------------------------------------|--------|
+| GET    | `/catalogo`       | Lista todos os itens                    | ✅ |
+| GET    | `/catalogo/:id`   | Detalha um item (404 se não existir)    | ✅ |
+| POST   | `/catalogo`       | Cria um item (201)                      | ✅ |
+| PUT    | `/catalogo/:id`   | Edita um item (parcial)                 | ✅ |
+| DELETE | `/catalogo/:id`   | Remove um item (204)                    | ✅ |
+
+> Nota: persistência ainda é em array (memória) — SQLite adiado por decisão registrada
+> no `ESCOPO.md` (seção 11). Dados criados via `POST` não sobrevivem a reinícios do servidor.
 
 ## ▶️ Como rodar (quando implementado)
 

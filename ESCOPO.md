@@ -91,15 +91,16 @@ flowchart LR
 
 ## 8. Roteiro de execução (passo a passo, para quando começar)
 
-1. Planejar o modelo de dados — **feito neste documento**
-2. Criar o back-end com Node + Express (rotas CRUD, sem banco ainda — array em memória)
-3. Conectar o SQLite (substituir o array em memória pelas queries reais)
-4. Testar todas as rotas isoladamente via Postman/Thunder Client
-5. Criar o front-end com `npm create vite@latest frontend -- --template react`
-6. Construir os componentes (lista, formulário, filtro)
-7. Conectar o React à API via `fetch` (listar, criar, editar, excluir)
-8. Configurar CORS no Express
-9. Revisão final + ajustes de UX simples (loading, mensagens de erro)
+1. ✅ Planejar o modelo de dados
+2. ✅ Criar o back-end com Node + Express (rotas CRUD completas: GET, GET/:id, POST, PUT, DELETE — testadas via Thunder Client, com tratamento de erro 404)
+3. ⏸️ Conectar o SQLite — **adiado por decisão consciente** (ver seção 11)
+4. ✅ Testar todas as rotas isoladamente via Thunder Client (feito no passo 2, junto com a criação de cada rota)
+5. 🔵 Criar o front-end com `npm create vite@latest frontend -- --template react` — **em andamento**
+6. 🔵 Configurar **React Router** (`react-router-dom`) e páginas básicas de navegação — **próximo passo imediato**, motivado por dificuldade da aula em entender rotas
+7. ⬜ Construir os componentes (lista, formulário, filtro)
+8. ⬜ Conectar o React à API via `fetch` (listar, criar, editar, excluir)
+9. ✅ Configurar CORS no Express (feito no passo 2)
+10. ⬜ Revisão final + ajustes de UX simples (loading, mensagens de erro)
 
 ## 9. Fora de escopo (por enquanto)
 
@@ -110,5 +111,24 @@ flowchart LR
 
 ## 10. Status
 
-🟡 **Planejamento concluído — implementação não iniciada.**
-Próximo passo ao retomar: item 2 do roteiro (back-end com Node + Express).
+🟢 **Back-end funcional (CRUD completo, com array em memória).**
+🔵 **Front-end iniciando — foco imediato em React Router.**
+
+Próximo passo: item 6 do roteiro (configurar `react-router-dom` e páginas básicas de navegação).
+
+## 11. Decisões registradas
+
+**SQLite adiado (passo 3):** decisão consciente de pular a persistência com banco de dados
+por enquanto. Motivo: o foco imediato é acompanhar o conteúdo de React/Vite que será
+abordado na semana seguinte de aula, e o SQLite não é pré-requisito para isso — a estrutura
+das rotas (status HTTP, `req.params`, `req.body`) permanece igual independente de onde os
+dados são guardados. Efeito colateral aceito: o array em memória reseta a cada reinício do
+`nodemon`, então dados criados via `POST` durante os testes não persistem entre sessões.
+Retomar esse passo quando o projeto for tratado como entrega "definitiva", ou quando a
+disciplina abordar bancos de dados.
+
+**React Router priorizado antes dos componentes de conteúdo:** ajuste no roteiro original
+motivado por uma dificuldade real em aula — ao tentar acessar páginas diretamente (ex: via
+URL ou F5), sem o roteamento configurado, as páginas não abriam. O objetivo agora é entender
+a mecânica de rotas dentro do React de forma sólida (aplicável a qualquer projeto, não só
+este), antes de preencher as páginas com conteúdo e dados reais da API.
