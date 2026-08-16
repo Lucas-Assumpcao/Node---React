@@ -1,0 +1,84 @@
+# 📚 Catálogo de Anime/Livros
+
+Projeto de estudo full-stack (Node.js + React) construído como preparação prática
+para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
+
+> Status: 🟡 Planejamento concluído — implementação ainda não iniciada.
+> Veja o roteiro completo em [`ESCOPO.md`](./ESCOPO.md).
+
+## 💡 Sobre o projeto
+
+Um CRUD pessoal para acompanhar animes e livros: o que já assisti/li, o que estou
+acompanhando, o que quero começar, com nota e comentário opcionais.
+
+O objetivo principal não é o resultado final, e sim fixar na prática:
+
+- Construção de uma API REST do zero (Node.js + Express)
+- Persistência de dados com SQLite
+- Front-end com React usando Vite (build tool exigida pela disciplina)
+- Comunicação entre front e back via `fetch` (requisições HTTP + JSON)
+- Fluxo completo de CRUD (Create, Read, Update, Delete) ponta a ponta
+
+## 🛠️ Stack
+
+| Camada     | Tecnologia                     |
+|------------|----------------------------------|
+| Back-end   | Node.js, Express                 |
+| Banco      | SQLite (`better-sqlite3`)        |
+| Front-end  | React, Vite                      |
+| Comunicação| REST / JSON                      |
+
+## 🗂️ Estrutura
+
+```
+catalogo-anime-livros/
+├── ESCOPO.md          # documento de planejamento completo
+├── README.md
+├── backend/            # API REST (Node + Express + SQLite)
+└── frontend/           # Interface (React + Vite)
+```
+
+## 🔀 Fluxo de dados
+
+```mermaid
+flowchart LR
+    A[React - services/api.js] -- fetch --> B[Express - routes/catalogo.js]
+    B --> C[SQLite - database.js]
+    C --> B
+    B -- JSON --> A
+```
+
+## 📋 Rotas da API (planejadas)
+
+| Método | Rota             | Ação                |
+|--------|-------------------|----------------------|
+| GET    | `/catalogo`       | Lista todos os itens |
+| GET    | `/catalogo/:id`   | Detalha um item      |
+| POST   | `/catalogo`       | Cria um item         |
+| PUT    | `/catalogo/:id`   | Edita um item        |
+| DELETE | `/catalogo/:id`   | Remove um item       |
+
+## ▶️ Como rodar (quando implementado)
+
+```bash
+# back-end
+cd backend
+npm install
+npm run dev      # sobe em http://localhost:3000
+
+# front-end (em outro terminal)
+cd frontend
+npm install
+npm run dev      # sobe em http://localhost:5173
+```
+
+## 🚧 Fora de escopo (por enquanto)
+
+- Autenticação/login
+- Deploy em produção
+- Testes automatizados
+
+## 📖 Documentação completa
+
+Todas as decisões de modelagem, estrutura de pastas e roteiro de execução
+passo a passo estão detalhadas em [`ESCOPO.md`](./ESCOPO.md).
