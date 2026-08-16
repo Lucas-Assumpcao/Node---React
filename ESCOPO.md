@@ -95,7 +95,7 @@ flowchart LR
 2. ✅ Criar o back-end com Node + Express (rotas CRUD completas: GET, GET/:id, POST, PUT, DELETE — testadas via Thunder Client, com tratamento de erro 404)
 3. ⏸️ Conectar o SQLite — **adiado por decisão consciente** (ver seção 11)
 4. ✅ Testar todas as rotas isoladamente via Thunder Client (feito no passo 2, junto com a criação de cada rota)
-5. 🔵 Criar o front-end com `npm create vite@latest frontend -- --template react` — **em andamento**
+5. ✅ Criar o front-end com `npm create vite@latest frontend -- --template react` (linter: ESLint)
 6. 🔵 Configurar **React Router** (`react-router-dom`) e páginas básicas de navegação — **próximo passo imediato**, motivado por dificuldade da aula em entender rotas
 7. ⬜ Construir os componentes (lista, formulário, filtro)
 8. ⬜ Conectar o React à API via `fetch` (listar, criar, editar, excluir)
@@ -112,9 +112,28 @@ flowchart LR
 ## 10. Status
 
 🟢 **Back-end funcional (CRUD completo, com array em memória).**
-🔵 **Front-end iniciando — foco imediato em React Router.**
+🟢 **Projeto front-end criado (Vite + React + ESLint), fundamentos de React estudados.**
+🔵 **Próximo: React Router.**
 
 Próximo passo: item 6 do roteiro (configurar `react-router-dom` e páginas básicas de navegação).
+
+## 12. Conceitos de React já estudados (16/08/2026)
+
+Para retomar rápido em uma próxima sessão, sem precisar reexplicar do zero:
+
+- **Componente**: função JavaScript que retorna JSX, nome sempre com letra maiúscula
+  (ex: `function ItemCatalogo() { return <div>...</div>; }`)
+- **JSX**: sintaxe parecida com HTML dentro do JavaScript; para inserir valores dinâmicos,
+  usa-se chaves `{ }` (ex: `<h1>Olá, {props.nome}!</h1>`)
+- **Props**: forma de passar dados para dentro de um componente via atributos
+  (ex: `<ItemCatalogo titulo="Jujutsu Kaisen" status="em_andamento" />`), somente leitura
+- **State (`useState`)**: hook que cria uma variável "vigiada" pelo React — quando muda via
+  a função `set` (ex: `setCount`), o React redesenha a tela automaticamente. Nunca se altera
+  o valor diretamente (`count = count + 1` não funciona; precisa de `setCount(count + 1)`)
+
+Motivo de aprender React Router antes de construir os componentes de conteúdo: dificuldade
+relatada em aula ao tentar acessar páginas diretamente (via URL ou F5) sem o roteamento
+configurado — as páginas não abriam.
 
 ## 11. Decisões registradas
 

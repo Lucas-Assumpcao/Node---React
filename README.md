@@ -3,7 +3,7 @@
 Projeto de estudo full-stack (Node.js + React) construído como preparação prática
 para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
 
-> Status: 🟢 Back-end funcional (CRUD completo) · 🔵 Front-end em andamento (React Router)
+> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Projeto front-end criado (Vite+React) · 🔵 Próximo: React Router
 > Veja o roteiro e as decisões de progresso completas em [`ESCOPO.md`](./ESCOPO.md).
 
 ## 💡 Sobre o projeto
