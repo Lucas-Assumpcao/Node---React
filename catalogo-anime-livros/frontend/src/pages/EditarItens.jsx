@@ -34,45 +34,62 @@ function EditarItem() {
   }
 
   return (
-    <div>
+    <div className="pagina">
       <h1>Editar Item</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={formulario.titulo}
-          onChange={(e) => setFormulario({ ...formulario, titulo: e.target.value })}
-        />
+      <p className="subtitulo">Atualize as informações deste item</p>
 
-        <select
-          value={formulario.tipo}
-          onChange={(e) => setFormulario({ ...formulario, tipo: e.target.value })}
-        >
-          <option value="anime">Anime</option>
-          <option value="livro">Livro</option>
-        </select>
+      <form onSubmit={handleSubmit} className="formulario">
+        <div className="campo">
+          <label>Título</label>
+          <input
+            type="text"
+            value={formulario.titulo}
+            onChange={(e) => setFormulario({ ...formulario, titulo: e.target.value })}
+          />
+        </div>
 
-        <select
-          value={formulario.status}
-          onChange={(e) => setFormulario({ ...formulario, status: e.target.value })}
-        >
-          <option value="quero_ver">Quero ver</option>
-          <option value="em_andamento">Em andamento</option>
-          <option value="completo">Completo</option>
-        </select>
+        <div className="campo">
+          <label>Tipo</label>
+          <select
+            value={formulario.tipo}
+            onChange={(e) => setFormulario({ ...formulario, tipo: e.target.value })}
+          >
+            <option value="anime">Anime</option>
+            <option value="livro">Livro</option>
+          </select>
+        </div>
 
-        <input
-          type="number"
-          value={formulario.nota}
-          onChange={(e) => setFormulario({ ...formulario, nota: Number(e.target.value) })}
-        />
+        <div className="campo">
+          <label>Status</label>
+          <select
+            value={formulario.status}
+            onChange={(e) => setFormulario({ ...formulario, status: e.target.value })}
+          >
+            <option value="quero_ver">Quero ver</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="completo">Completo</option>
+          </select>
+        </div>
 
-        <input
-          type="text"
-          value={formulario.comentario}
-          onChange={(e) => setFormulario({ ...formulario, comentario: e.target.value })}
-        />
+        <div className="campo">
+          <label>Nota</label>
+          <input
+            type="number"
+            value={formulario.nota}
+            onChange={(e) => setFormulario({ ...formulario, nota: Number(e.target.value) })}
+          />
+        </div>
 
-        <button type="submit">Salvar edição</button>
+        <div className="campo">
+          <label>Comentário</label>
+          <input
+            type="text"
+            value={formulario.comentario}
+            onChange={(e) => setFormulario({ ...formulario, comentario: e.target.value })}
+          />
+        </div>
+
+        <button type="submit" className="botao-primario">Salvar edição</button>
       </form>
     </div>
   );
