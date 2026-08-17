@@ -23,25 +23,25 @@ CRUD completo de um catálogo pessoal de animes e livros:
 
 Tabela única `catalogo`:
 
-| Campo         | Tipo                                             | Obrigatório | Observação                          |
-|---------------|---------------------------------------------------|-------------|--------------------------------------|
-| `id`          | INTEGER (auto increment, PK)                       | sim (auto)  | Identificador único                   |
-| `titulo`      | TEXT                                               | sim         | Nome do anime/livro                   |
-| `tipo`        | TEXT (`anime` \| `livro`)                          | sim         | Categoria                             |
-| `status`      | TEXT (`quero_ver` \| `em_andamento` \| `completo`) | sim         | Estado atual                          |
-| `nota`        | INTEGER (1–5)                                      | não         | Avaliação pessoal                     |
-| `comentario`  | TEXT                                               | não         | Observações livres                    |
-| `criado_em`   | DATETIME (auto)                                    | sim (auto)  | Data de criação do registro           |
+| Campo        | Tipo                                               | Obrigatório | Observação                  |
+| ------------ | -------------------------------------------------- | ----------- | --------------------------- |
+| `id`         | INTEGER (auto increment, PK)                       | sim (auto)  | Identificador único         |
+| `titulo`     | TEXT                                               | sim         | Nome do anime/livro         |
+| `tipo`       | TEXT (`anime` \| `livro`)                          | sim         | Categoria                   |
+| `status`     | TEXT (`quero_ver` \| `em_andamento` \| `completo`) | sim         | Estado atual                |
+| `nota`       | INTEGER (1–5)                                      | não         | Avaliação pessoal           |
+| `comentario` | TEXT                                               | não         | Observações livres          |
+| `criado_em`  | DATETIME (auto)                                    | sim (auto)  | Data de criação do registro |
 
 ## 4. Stack técnica
 
-| Camada       | Tecnologia                          | Motivo                                                        |
-|--------------|--------------------------------------|-----------------------------------------------------------------|
-| Back-end     | Node.js + Express                    | Exigência da disciplina; API REST simples e amplamente usada    |
-| Banco        | SQLite (via `better-sqlite3`)        | Zero configuração de servidor; SQL de verdade; ideal p/ estudo  |
-| Front-end    | React + Vite                         | Exigência da disciplina (professor usa Vite)                    |
-| Comunicação  | REST (JSON) via `fetch`              | Padrão mais comum em entrevistas e no mercado                   |
-| CORS         | pacote `cors` no Express             | Front (porta 5173) e back (porta 3000) rodam separados          |
+| Camada      | Tecnologia                    | Motivo                                                         |
+| ----------- | ----------------------------- | -------------------------------------------------------------- |
+| Back-end    | Node.js + Express             | Exigência da disciplina; API REST simples e amplamente usada   |
+| Banco       | SQLite (via `better-sqlite3`) | Zero configuração de servidor; SQL de verdade; ideal p/ estudo |
+| Front-end   | React + Vite                  | Exigência da disciplina (professor usa Vite)                   |
+| Comunicação | REST (JSON) via `fetch`       | Padrão mais comum em entrevistas e no mercado                  |
+| CORS        | pacote `cors` no Express      | Front (porta 5173) e back (porta 3000) rodam separados         |
 
 ## 5. Estrutura de pastas planejada
 
@@ -71,13 +71,13 @@ catalogo-anime-livros/
 
 ## 6. Rotas da API (planejadas)
 
-| Método | Rota                | Ação                          |
-|--------|----------------------|--------------------------------|
-| GET    | `/catalogo`          | Lista todos os itens           |
-| GET    | `/catalogo/:id`      | Detalha um item                |
-| POST   | `/catalogo`          | Cria um item                   |
-| PUT    | `/catalogo/:id`      | Edita um item                  |
-| DELETE | `/catalogo/:id`      | Remove um item                 |
+| Método | Rota            | Ação                 |
+| ------ | --------------- | -------------------- |
+| GET    | `/catalogo`     | Lista todos os itens |
+| GET    | `/catalogo/:id` | Detalha um item      |
+| POST   | `/catalogo`     | Cria um item         |
+| PUT    | `/catalogo/:id` | Edita um item        |
+| DELETE | `/catalogo/:id` | Remove um item       |
 
 ## 7. Fluxo de dados (visão geral)
 
@@ -101,8 +101,8 @@ flowchart LR
 8. ✅ Conectar o React à API via `fetch`: listagem via `useEffect` (GET) e criação via `handleSubmit` (POST), com reset do formulário após salvar
 9. ✅ Configurar CORS no Express (feito no passo 2)
 10. ⬜ Revisão final + ajustes de UX (loading, mensagens de erro, evitar duplicidade de POST em cliques múltiplos)
-11. ⬜ Editar item pela interface (reaproveitar rota PUT já testada)
-12. ⬜ Remover item pela interface (reaproveitar rota DELETE já testada)
+11. ✅ Remover item pela interface (botão "Excluir" na lista, `DELETE` + atualização do state com `.filter()`)
+12. ✅ Editar item pela interface (rota `/editar/:id`, `useParams` + `useEffect` para buscar dados existentes, `useNavigate` para redirecionar após salvar, `PUT`)
 13. ⬜ Filtro por tipo/status na lista
 14. ⬜ Estilização (CSS mínimo, funcional)
 
@@ -116,9 +116,9 @@ flowchart LR
 ## 10. Status
 
 🟢 **Back-end funcional (CRUD completo, com array em memória).**
-🟢 **Front-end funcional: React Router, listagem via API (GET) e criação via formulário (POST).**
+🟢 **Front-end funcional: CRUD completo pela interface — listar, criar, editar e remover, todos conectados à API.**
 🟢 **Repositório limpo: `node_modules` removido do controle de versão, `.gitignore` na raiz correta, confirmado no GitHub.**
-🔵 **Próximo: editar/remover item pela interface (reaproveitando rotas PUT/DELETE já testadas).**
+🔵 **Próximo: filtro por tipo/status, ou estilização (CSS).**
 
 ## 11. Decisões registradas
 
@@ -145,6 +145,7 @@ mantém os arquivos localmente) seguido de commit incluindo o `.gitignore`. A pa
 `frontend/node_modules` nunca chegou a ser commitada, então não precisou do mesmo tratamento.
 
 Duas armadilhas encontradas e resolvidas no processo (registradas para referência futura):
+
 1. A ordem importa — `.gitignore` precisa estar **commitado antes** de rodar `git add -A`,
    senão arquivos que deveriam ser ignorados (como `node_modules`) podem ser re-adicionados
    ao índice do Git sem querer, desfazendo o `git rm --cached`.
@@ -175,7 +176,9 @@ Para retomar rápido em uma próxima sessão, sem precisar reexplicar do zero:
   da API assim que a página carrega (`fetch` dentro do `useEffect`)
 - **React Router**: `BrowserRouter` (envolve a aplicação, ativa o roteamento), `Routes` +
   `Route` (associam caminho de URL a um componente), `Link` (navega sem recarregar a página,
-  ao contrário de `<a href>`)
+  ao contrário de `<a href>`), `useParams` (lê parâmetros dinâmicos da URL, ex: `:id` em
+  `/editar/:id`), `useNavigate` (redireciona programaticamente após uma ação, ex: depois de
+  salvar um formulário)
 - **Formulário controlado**: cada campo tem seu valor vindo de um `state` (`value={...}`) e
   atualizado via `onChange`; múltiplos campos guardados em um objeto só, atualizados com
   spread (`setFormulario({ ...formulario, campo: novoValor })`) para não apagar os demais

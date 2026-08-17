@@ -3,7 +3,7 @@
 Projeto de estudo full-stack (Node.js + React) construído como preparação prática
 para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
 
-> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Front-end funcional (React Router + listagem + criação via API) · 🔵 Próximo: editar/remover pela interface
+> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Front-end funcional (CRUD completo pela interface: listar, criar, editar, remover) · 🔵 Próximo: filtro por tipo/status ou estilização
 > Veja o roteiro e as decisões de progresso completas em [`ESCOPO.md`](./ESCOPO.md).
 
 ## 💡 Sobre o projeto
@@ -21,12 +21,12 @@ O objetivo principal não é o resultado final, e sim fixar na prática:
 
 ## 🛠️ Stack
 
-| Camada     | Tecnologia                     |
-|------------|----------------------------------|
-| Back-end   | Node.js, Express                 |
-| Banco      | SQLite (`better-sqlite3`)        |
-| Front-end  | React, Vite                      |
-| Comunicação| REST / JSON                      |
+| Camada      | Tecnologia                |
+| ----------- | ------------------------- |
+| Back-end    | Node.js, Express          |
+| Banco       | SQLite (`better-sqlite3`) |
+| Front-end   | React, Vite               |
+| Comunicação | REST / JSON               |
 
 ## 🗂️ Estrutura
 
@@ -50,23 +50,24 @@ flowchart LR
 
 ## 📋 Rotas da API (implementadas e testadas via Thunder Client)
 
-| Método | Rota             | Ação                                  | Status |
-|--------|-------------------|-----------------------------------------|--------|
-| GET    | `/catalogo`       | Lista todos os itens                    | ✅ |
-| GET    | `/catalogo/:id`   | Detalha um item (404 se não existir)    | ✅ |
-| POST   | `/catalogo`       | Cria um item (201)                      | ✅ |
-| PUT    | `/catalogo/:id`   | Edita um item (parcial)                 | ✅ |
-| DELETE | `/catalogo/:id`   | Remove um item (204)                    | ✅ |
+| Método | Rota            | Ação                                 | Status |
+| ------ | --------------- | ------------------------------------ | ------ |
+| GET    | `/catalogo`     | Lista todos os itens                 | ✅     |
+| GET    | `/catalogo/:id` | Detalha um item (404 se não existir) | ✅     |
+| POST   | `/catalogo`     | Cria um item (201)                   | ✅     |
+| PUT    | `/catalogo/:id` | Edita um item (parcial)              | ✅     |
+| DELETE | `/catalogo/:id` | Remove um item (204)                 | ✅     |
 
 > Nota: persistência ainda é em array (memória) — SQLite adiado por decisão registrada
 > no `ESCOPO.md` (seção 11). Dados criados via `POST` não sobrevivem a reinícios do servidor.
 
 ## 🧭 Rotas do front-end (React Router)
 
-| Caminho  | Página            | Status |
-|----------|--------------------|--------|
-| `/`      | `ListaCatalogo` — lista os itens vindos da API (GET) | ✅ |
-| `/novo`  | `NovoItem` — formulário controlado que cria um item (POST) | ✅ |
+| Caminho       | Página                                                                                                       | Status |
+| ------------- | ------------------------------------------------------------------------------------------------------------ | ------ |
+| `/`           | `ListaCatalogo` — lista os itens vindos da API (GET), com ações de editar e excluir                          | ✅     |
+| `/novo`       | `NovoItem` — formulário controlado que cria um item (POST)                                                   | ✅     |
+| `/editar/:id` | `EditarItens` — formulário pré-preenchido com os dados do item (GET + PUT), redireciona para `/` após salvar | ✅     |
 
 > Navegação sem reload via `<Link>`, e F5 funciona normalmente em qualquer rota
 > (resolve um problema real enfrentado em aula com roteamento no React).
