@@ -100,11 +100,11 @@ flowchart LR
 7. ✅ Construir os componentes de conteúdo inicial: `ListaCatalogo` (lista com `.map()`) e `NovoItem` (formulário controlado com `useState`)
 8. ✅ Conectar o React à API via `fetch`: listagem via `useEffect` (GET) e criação via `handleSubmit` (POST), com reset do formulário após salvar
 9. ✅ Configurar CORS no Express (feito no passo 2)
-10. ⬜ Revisão final + ajustes de UX (loading, mensagens de erro, evitar duplicidade de POST em cliques múltiplos)
+10. ⏸️ Ajustes de UX (loading, mensagens de erro, evitar duplicidade de POST) — **fora de escopo por decisão** (ver seção 11)
 11. ✅ Remover item pela interface (botão "Excluir" na lista, `DELETE` + atualização do state com `.filter()`)
 12. ✅ Editar item pela interface (rota `/editar/:id`, `useParams` + `useEffect` para buscar dados existentes, `useNavigate` para redirecionar após salvar, `PUT`)
-13. ⬜ Filtro por tipo/status na lista
-14. ⬜ Estilização (CSS mínimo, funcional)
+13. ✅ Filtro por tipo na lista (`useState` + `.filter()` sobre os dados já carregados, sem nova requisição). Filtro por status avaliado e descartado por decisão — tipo já cobre o objetivo de praticar o padrão.
+14. ✅ Estilização: tema "biblioteca noturna" (fundo escuro, tipografia serifada nos títulos, acento dourado/teal diferenciando anime de livro), aplicado em todas as páginas (`index.css` + `className` nos componentes)
 
 ## 9. Fora de escopo (por enquanto)
 
@@ -116,21 +116,27 @@ flowchart LR
 ## 10. Status
 
 🟢 **Back-end funcional (CRUD completo, com array em memória).**
-🟢 **Front-end funcional: CRUD completo pela interface — listar, criar, editar e remover, todos conectados à API.**
+🟢 **Front-end funcional: CRUD completo pela interface (listar, criar, editar, remover), com filtro por tipo e visual próprio aplicado.**
 🟢 **Repositório limpo: `node_modules` removido do controle de versão, `.gitignore` na raiz correta, confirmado no GitHub.**
-🔵 **Próximo: filtro por tipo/status, ou estilização (CSS).**
+🏁 **Escopo essencial do projeto concluído.** Itens remanescentes (UX avançado, SQLite) ficam fora de escopo por decisão — ver seção 11.
 
 ## 11. Decisões registradas
 
-**SQLite adiado (passo 3):** decisão consciente de pular a persistência com banco de dados
-por enquanto. Motivo: o foco imediato é acompanhar o conteúdo de React/Vite que será
-abordado na semana seguinte de aula, e o SQLite não é pré-requisito para isso — a estrutura
-das rotas (status HTTP, `req.params`, `req.body`) permanece igual independente de onde os
-dados são guardados. Efeito colateral aceito: o array em memória reseta a cada reinício do
-`nodemon` (ou permanece "travado" em um estado antigo se o processo continuar rodando sem
-reiniciar — já observado na prática ao testar a lista com o array vazio de uma sessão
-anterior). Retomar esse passo quando o projeto for tratado como entrega "definitiva", ou
-quando a disciplina abordar bancos de dados.
+**SQLite fora de escopo neste projeto:** decisão consciente de não implementar persistência
+com banco de dados aqui. Motivo: o foco de carreira do usuário é back-end, e SQLite/bancos de
+dados merecem um projeto dedicado só para isso, em vez de ser tratado como um apêndice deste
+catálogo. Efeito aceito: o array em memória reseta a cada reinício do `nodemon` (ou permanece
+"travado" em um estado antigo se o processo continuar rodando sem reiniciar — já observado na
+prática). Retomar em projeto próprio, focado em bancos de dados, quando fizer sentido.
+
+**Ajustes de UX (loading, mensagens de erro, duplo clique) fora de escopo:** decisão consciente
+de não aprofundar nessa frente neste projeto — o objetivo era fixar os fundamentos de back-end
+e do CRUD em React, não polir experiência de uso. Pode ser revisitado no futuro se o projeto for
+usado como peça de portfólio.
+
+**Filtro por status avaliado e descartado:** implementado apenas o filtro por tipo (anime/livro).
+O filtro por status foi considerado redundante para o objetivo de praticar o padrão (mesmo
+`useState` + `.filter()`), então não foi adicionado.
 
 **React Router priorizado antes dos componentes de conteúdo:** ajuste no roteiro original
 motivado por uma dificuldade real em aula — ao tentar acessar páginas diretamente (ex: via

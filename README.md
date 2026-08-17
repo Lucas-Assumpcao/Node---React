@@ -3,7 +3,7 @@
 Projeto de estudo full-stack (Node.js + React) construído como preparação prática
 para a disciplina de back-end/front-end do curso de ADS — Senai Barueri.
 
-> Status: 🟢 Back-end funcional (CRUD completo) · 🟢 Front-end funcional (CRUD completo pela interface: listar, criar, editar, remover) · 🔵 Próximo: filtro por tipo/status ou estilização
+> Status: 🏁 Escopo essencial concluído — CRUD completo (back-end + front-end), filtro por tipo, visual próprio aplicado
 > Veja o roteiro e as decisões de progresso completas em [`ESCOPO.md`](./ESCOPO.md).
 
 ## 💡 Sobre o projeto
