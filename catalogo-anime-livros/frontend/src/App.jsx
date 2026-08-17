@@ -1,6 +1,7 @@
 import {Routes,Route ,Link} from 'react-router-dom';
 import NovoItem from "./pages/NovoItem";
 import ListaCatalogo from "./pages/ListaCatalogo";
+import EditarItens from './pages/EditarItens';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ListaCatalogo />} />
         <Route path="/novo" element={<NovoItem />} />
+        <Route path="/editar/:id" element={<EditarItens />} />
       </Routes>
     </div>
   );
