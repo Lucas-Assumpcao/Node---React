@@ -1,12 +1,12 @@
-import {Routes,Route ,Link} from 'react-router-dom';
-import NovoItem from "./pages/NovoItem";
-import ListaCatalogo from "./pages/ListaCatalogo";
+import { Routes, Route, Link } from 'react-router-dom';
+import NovoItem from './pages/NovoItem';
+import ListaCatalogo from './pages/ListaCatalogo';
 import EditarItens from './pages/EditarItens';
 
 function App() {
   return (
     <div>
-      <nav>
+      <nav className="nav">
         <Link to="/">Catálogo</Link>
         <Link to="/novo">Novo Item</Link>
       </nav>
